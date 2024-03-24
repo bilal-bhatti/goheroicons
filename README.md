@@ -22,7 +22,7 @@ import (
 )
 
 func main() {
-    fmt.Println(outline.AcademicCap().Render(context.Background(), os.Stdout))
+    outline.AcademicCap().Render(context.Background(), os.Stdout)
 }
 ```
 
