@@ -3,7 +3,6 @@ package main
 import (
 	"flag"
 	"fmt"
-	"go/format"
 	"os"
 	"path/filepath"
 	"strings"
@@ -58,7 +57,7 @@ func embedSVGFiles(dir, pkgName string) {
 			pkg := strings.Split(strings.TrimRight(pkgName, "/"), "/")
 			fnBody := body(strings.ToLower(pkg[len(pkg)-1]), fnName, fileData)
 
-			if err := os.WriteFile(fileName+".go", []byte(fnBody), 0666); err != nil {
+			if err := os.WriteFile(fileName+".templ", []byte(fnBody), 0666); err != nil {
 				panic(err)
 			}
 		}
@@ -70,14 +69,9 @@ func body(pkg, fn string, data []byte) string {
 
 	builder.WriteString("package " + pkg + "\n")
 	builder.WriteString("\n")
-	builder.WriteString("func " + strings.ReplaceAll(strings.Title(fn), "-", "") + "() string {\n")
-	builder.WriteString("  return `" + strings.TrimSpace(string(data)) + "`")
-	builder.WriteString("}\n")
+	builder.WriteString("templ " + strings.ReplaceAll(strings.Title(fn), "-", "") + "() {\n")
+	builder.WriteString(strings.TrimSpace(string(data)))
+	builder.WriteString("\n}\n")
 
-	source, err := format.Source([]byte(builder.String()))
-	if err != nil {
-		panic(err)
-	}
-
-	return string(source)
+	return builder.String()
 }
