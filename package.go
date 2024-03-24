@@ -52,10 +52,10 @@ func embedSVGFiles(dir, pkgName string) {
 			fmt.Println(pkgName + file.Name())
 
 			path := strings.TrimRight(strings.ReplaceAll(pkgName, "-", "_"), "/")
-			path = "pkg" + "/" + strings.ToLower(path)
-			os.MkdirAll(path, os.ModePerm)
+			// path = "pkg" + "/" + strings.ToLower(path)
+			os.MkdirAll("pkg"+"/"+"s"+strings.ToLower(path), os.ModePerm)
 
-			fileName := path + "/" + strings.ToLower(svgFileName)
+			fileName := "pkg" + "/" + "s" + strings.ToLower(path) + "/" + strings.ToLower(svgFileName)
 			fnName := strings.ToLower(strings.Title(svgFileName))
 			pkg := strings.Split(strings.TrimRight(pkgName, "/"), "/")
 			fnBody := body(strings.ToLower(pkg[len(pkg)-1]), fnName, fileData)

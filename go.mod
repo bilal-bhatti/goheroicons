@@ -1,3 +1,3 @@
-module github.com/bilal-bhatti/goheroicons/pkg
+module github.com/bilal-bhatti/goheroicons
 
 go 1.22.1
