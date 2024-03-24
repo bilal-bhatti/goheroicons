@@ -9,6 +9,13 @@ go get github.com/bilal-bhatti/goheroicons
 ``` go
 package main
 
+// import desired size and style
+// s16/solid, s20/solid, s24/solid or s24/outline
+// s24 comes in solid and outline variety
+
+// import "github.com/bilal-bhatti/goheroicons/pkg/s16/solid"
+// import "github.com/bilal-bhatti/goheroicons/pkg/s20/solid"
+// import "github.com/bilal-bhatti/goheroicons/pkg/s24/solid"
 import "github.com/bilal-bhatti/goheroicons/pkg/s24/outline"
 
 func main() {
