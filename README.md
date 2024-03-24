@@ -16,10 +16,13 @@ package main
 // import "github.com/bilal-bhatti/goheroicons/pkg/s16/solid"
 // import "github.com/bilal-bhatti/goheroicons/pkg/s20/solid"
 // import "github.com/bilal-bhatti/goheroicons/pkg/s24/solid"
-import "github.com/bilal-bhatti/goheroicons/pkg/s24/outline"
+import (
+    "context"
+    "github.com/bilal-bhatti/goheroicons/pkg/s24/outline"
+)
 
 func main() {
-    fmt.Println(outline.AcademicCap())
+    fmt.Println(outline.AcademicCap().Render(context.Background(), os.Stdout))
 }
 ```
 
