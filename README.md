@@ -1,5 +1,21 @@
 # Go package for Tailwind CSS heroicons set
 
+## Usage
+
+```sh
+go get github.com/bilal-bhatti/goheroicons
+```
+
+``` go
+package main
+
+import "github.com/bilal-bhatti/goheroicons/pkg/s24/outline"
+
+func main() {
+    fmt.Println(outline.AcademicCap())
+}
+```
+
 ## Upstream Repository
 
 To pull a Git submodule, use the “git submodule update” command with the “–init” and the “–recursive” options.

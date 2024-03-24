@@ -12,7 +12,6 @@ import (
 func main() {
 	var assetsPath string
 	flag.StringVar(&assetsPath, "assets", "", "path to assets directory")
-	// assetsPath := flag.String("assets", "", "Path to the assets directory")
 	flag.Parse()
 
 	fmt.Println(assetsPath)
@@ -41,7 +40,7 @@ func embedSVGFiles(dir, pkgName string) {
 			embedSVGFiles(filepath.Join(dir, file.Name()), subPkgName)
 		} else if strings.HasSuffix(file.Name(), ".svg") {
 			filePath := filepath.Join(dir, file.Name())
-			// fileData, err := fs.ReadFile(content, filePath)
+
 			fileData, err := os.ReadFile(filePath)
 			if err != nil {
 				fmt.Println("Error reading file:", err)
@@ -52,7 +51,6 @@ func embedSVGFiles(dir, pkgName string) {
 			fmt.Println(pkgName + file.Name())
 
 			path := strings.TrimRight(strings.ReplaceAll(pkgName, "-", "_"), "/")
-			// path = "pkg" + "/" + strings.ToLower(path)
 			os.MkdirAll("pkg"+"/"+"s"+strings.ToLower(path), os.ModePerm)
 
 			fileName := "pkg" + "/" + "s" + strings.ToLower(path) + "/" + strings.ToLower(svgFileName)
