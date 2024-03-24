@@ -1,14 +1,19 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"fmt"
 	"os"
 	"path/filepath"
 	"strings"
+
+	"github.com/beevik/etree"
+	"github.com/bilal-bhatti/goheroicons/pkg/s24/solid"
 )
 
 func main() {
+	solid.AcademicCap("bg-color-yellow").Render(context.Background(), os.Stdout)
 	var assetsPath string
 	flag.StringVar(&assetsPath, "assets", "", "path to assets directory")
 	flag.Parse()
@@ -65,12 +70,26 @@ func embedSVGFiles(dir, pkgName string) {
 }
 
 func body(pkg, fn string, data []byte) string {
-	builder := strings.Builder{}
+	doc := etree.NewDocument()
 
+	err := doc.ReadFromBytes(data)
+	if err != nil {
+		panic(err)
+	}
+
+	doc.Root().CreateAttr("class", "{{{styleClass}}}")
+
+	str, err := doc.WriteToString()
+	if err != nil {
+		panic(err)
+	}
+	str = strings.ReplaceAll(str, "\"{{{styleClass}}}\"", "{ styleClass }")
+
+	builder := strings.Builder{}
 	builder.WriteString("package " + pkg + "\n")
 	builder.WriteString("\n")
-	builder.WriteString("templ " + strings.ReplaceAll(strings.Title(fn), "-", "") + "() {\n")
-	builder.WriteString(strings.TrimSpace(string(data)))
+	builder.WriteString("templ " + strings.ReplaceAll(strings.Title(fn), "-", "") + "(styleClass string) {\n")
+	builder.WriteString(strings.TrimSpace(str))
 	builder.WriteString("\n}\n")
 
 	return builder.String()
