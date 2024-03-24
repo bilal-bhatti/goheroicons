@@ -1,7 +1,6 @@
 package main
 
 import (
-	"context"
 	"flag"
 	"fmt"
 	"os"
@@ -9,11 +8,9 @@ import (
 	"strings"
 
 	"github.com/beevik/etree"
-	"github.com/bilal-bhatti/goheroicons/pkg/s24/solid"
 )
 
 func main() {
-	solid.AcademicCap("bg-color-yellow").Render(context.Background(), os.Stdout)
 	var assetsPath string
 	flag.StringVar(&assetsPath, "assets", "", "path to assets directory")
 	flag.Parse()
